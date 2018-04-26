@@ -1,21 +1,23 @@
-# bitbox-scaffold-vue
+## BITBOX Scaffold Vue
 
-> A Vue.js project
+### Intro
 
-## Build Setup
+BITBOX scaffolds are basic apps w/ bindings to your local running BITBOX. They allow a developer to hit the ground running and waste no time w/ app set up and configuration.
 
-``` bash
-# install dependencies
-npm install
+This scaffold is a Vue app build w/ [Vue.js offical CLI `vue-cli`](https://vuejs.org/v2/guide/installation.html) using the "webpack" template. It already has `BITBOX` instantiated and is ready to roll.
 
-# serve with hot reload at localhost:8080
-npm run dev
+## Setup
 
-# build for production with minification
-npm run build
+1. Download the latest build from [bitbox.earth](https://www.bitbox.earth/) and compare [the checksums](https://github.com/bigearth/keys-n-hashes)
+2. Install and start your local BITBOX App
+3. [Install `bitbox-cli`](https://www.npmjs.com/package/bitbox-cli) globally
+	* `npm install bitbox-cli --global`
+4. Scaffold a Vue app w/ BITBOX web bindings
+	* `bitbox new hello-bitbox --scaffold vue`
+5. Install dependencies
+	* `npm install`
+6. Start the app
+	* `npm start`
+7. Open a browser to `http://localhost:8081/`
+8. Win
 
-# build for production and view the bundle analyzer report
-npm run build --report
-```
-
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).

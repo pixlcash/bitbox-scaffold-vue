@@ -1,17 +1,17 @@
 <template>
   <div id="app">
     <img src="./assets/logo.png">
-    <HelloWorld/>
+    <Bitbox/>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld'
+import Bitbox from './components/Bitbox'
 
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    Bitbox
   }
 }
 </script>
