@@ -1,8 +1,5 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <Bitbox/>
-  </div>
+  <Bitbox/>
 </template>
 
 <script>
