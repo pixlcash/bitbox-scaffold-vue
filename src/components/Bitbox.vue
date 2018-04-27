@@ -14,6 +14,9 @@
         </code>
       </p>
       <h3>BIP44 external change addresses</h3>
+      <ul>
+        <li v-for="(address, index) in addresses" :key="index">m/44&rsquo;/145&rsquo;/0&rsquo;/0/{{index}}:{{address}}</li>
+      </ul>
       <h3>Transaction raw hex</h3>
       <p>{{hex}}</p>
     </div>
@@ -89,12 +92,19 @@ let tx = transactionBuilder.build()
 let hex = tx.toHex()
 // BITBOX.RawTransactions.sendRawTransaction(hex).then((result) => { console.log("Broadcast Result: "+result); }, (err) => { console.log("Broadcast Error: "+err); })
 
+let addresses = []
+for (let i = 0; i < 10; i++) {
+  let childNode = masterHDNode.derivePath(`m/44'/145'/0'/0/${i}`)
+  addresses.push(BITBOX.HDNode.toCashAddress(childNode))
+}
+
 export default {
   name: 'BitBox',
   data () {
     return {
       mnemonic: BITBOX.Mnemonic.generate(256),
       lang: lang,
+      addresses: addresses,
       hex: hex
     }
   }
