@@ -1,10 +1,10 @@
 <template>
-  <div className="App">
-    <header className="App-header">
+  <div class="App">
+    <header class="App-header">
       <img src="../assets/logo.png">
-      <h1 className="App-title">Hello BITBOX</h1>
+      <h1 class="App-title">Hello BITBOX</h1>
     </header>
-    <div className='App-content'>
+    <div class='App-content'>
       <h2>BIP44 $BCH Wallet</h2>
       <h3>256 bit {{lang}} BIP39 Mnemonic:</h3> <p>{{mnemonic}}</p>
       <h3>BIP44 Account</h3>
@@ -102,7 +102,9 @@ export default {
 </script>
 
 <style scoped>
-  .container {
-    text-align: left;
+  .App {
+    font-family: sans-serif;
+    max-width: 100%;
+    word-wrap: break-word;
   }
 </style>
