@@ -18,5 +18,5 @@ This scaffold is a Vue app build w/ [Vue.js offical CLI `vue-cli`](https://vuejs
 	* `npm install`
 6. Start the app
 	* `npm start`
-7. Open a browser to `http://localhost:8080/`
+7. Open a browser to `http://localhost:3000/`
 8. Win
