@@ -25,14 +25,7 @@
 
 <script>
 let BITBOXCli = require('bitbox-cli/lib/bitboxcli').default
-let BITBOX = new BITBOXCli({
-  protocol: 'http',
-  host: '127.0.0.1',
-  port: 8332,
-  username: '',
-  password: '',
-  corsproxy: 'remote'
-})
+let BITBOX = new BITBOXCli()
 
 let langs = [
   'english',
@@ -66,6 +59,7 @@ let change = BITBOX.HDNode.derivePath(account, '0/0')
 let cashAddress = BITBOX.HDNode.toCashAddress(change)
 
 let hex
+let txid
 
 BITBOX.Address.utxo(cashAddress).then((result) => {
   if (!result[0]) {
@@ -105,10 +99,11 @@ BITBOX.Address.utxo(cashAddress).then((result) => {
   // build tx
   let tx = transactionBuilder.build()
   // output rawhex
-  let hex = tx.toHex()
+  hex = tx.toHex()
 
   // sendRawTransaction to running BCH node
   BITBOX.RawTransactions.sendRawTransaction(hex).then((result) => {
+    txid = result
     console.log(result)
   }, (err) => {
     console.log(err)

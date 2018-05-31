@@ -1,6 +1,6 @@
 {
   "name": "bitbox-scaffold-vue",
-  "version": "1.0.0",
+  "version": "0.9.0",
   "description": "A Vue.js project",
   "author": "cyio <icaner@qq.com>",
   "private": true,
@@ -11,7 +11,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "bitbox-cli": "^0.8.2",
+    "bitbox-cli": "0.9.0",
     "vue": "^2.5.2"
   },
   "devDependencies": {
