@@ -24,7 +24,7 @@
 </template>
 
 <script>
-let BITBOXCli = require('bitbox-cli/lib/bitboxcli').default
+let BITBOXCli = require('bitbox-cli/lib/bitbox-cli').default
 let BITBOX = new BITBOXCli()
 
 let langs = [
