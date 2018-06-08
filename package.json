@@ -11,7 +11,7 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "bitbox-cli": "0.9.5",
+    "bitbox-cli": "0.9.7",
     "vue": "^2.5.2"
   },
   "devDependencies": {
