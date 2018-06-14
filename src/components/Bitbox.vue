@@ -75,7 +75,7 @@ BITBOX.Address.utxo(cashAddress).then((result) => {
   let vout = result[0].vout
 
   // txid of vout
-  let txid = result[0].txid
+  txid = result[0].txid
 
   // add input with txid and index of vout
   transactionBuilder.addInput(txid, vout)
