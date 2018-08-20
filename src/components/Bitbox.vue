@@ -1,7 +1,6 @@
 <template>
   <div class="App">
     <header class="App-header">
-      <img src="../assets/logo.png">
       <h1 class="App-title">Hello BITBOX</h1>
     </header>
     <div class='App-content'>
