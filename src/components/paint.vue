@@ -1,8 +1,14 @@
 <template>
   <div>
-    <p>Das ist die Canvas</p>
+    <p>new pixl</p>
     <canvas v-on:click="draw" id="canvas" width="160" height="160" style="border:1px solid #BBB;" v-insert-message="picture"></canvas>
-
+    <b-form-textarea
+      v-model="text"
+      :rows="3"
+      :max-rows="6">
+    </b-form-textarea>
+    <b-progress-bar v-if="savingstate" :value="counter" max="100" show-progress animated></b-progress-bar>
+    <b-button  v-else v-on:click="save">to blockchain</b-button>
     <p v-bind:style="{ backgroundColor: '#'+picture.colors[selectedColorIndex]}">{{selectedColorIndex}}</p>
     <button v-for="(color,index) in picture.colors" v-bind:style="{ backgroundColor: '#'+color,width: '2em',height:'2em'}" v-on:click="selectedColorIndex=index"></button>
     <table>
@@ -28,6 +34,9 @@ export default {
       loading: 'Loading Color Palette...',
       selectedColorIndex: 0,
       selectedPallette: -1,
+      text: '',
+      savingstate: false,
+      counter: 0,
       choosenPallette: 0,
       picture:
         {data: '0'.repeat(256),
@@ -50,6 +59,17 @@ export default {
     }
   },
   methods: {
+    save: function (event) {
+      this.savingstate = true
+      let that = this
+      this.$parent.addInput('7e02', this.picture.palletteId, this.picture.data, function (event) {
+        that.counter = 100
+        alert('saved succesful with id ' + event)
+        that.savingstate = false
+      }, function (event) {
+        that.counter = event
+      })
+    },
     draw: function (event) {
       let rect = event.target.getBoundingClientRect()
       let x1 = parseInt((event.clientX - rect.left) / 10)
