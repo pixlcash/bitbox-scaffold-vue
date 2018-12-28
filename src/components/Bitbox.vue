@@ -20,6 +20,39 @@ export default {
       addresses: []
     }
   },
+  created () {
+    let query = {
+
+      'v': 3,
+      'q': {
+        'find': {
+          'out.h1': '7e01'
+        }
+      }
+    }
+    let b64 = btoa(JSON.stringify(query))
+    let url = 'https://bitdb.network/q/' + b64
+    let that = this
+    let convert = function (r) {
+      let pallette = {
+        colors: r.out[1].h2.match(/.{1,6}/g),
+        name: r.out[1].s3,
+        tx: r.tx.h,
+        sender: 'no'
+      }
+      that.palletes.push(pallette)
+    }
+
+    let header = {
+      headers: { key: 'qpyh2anc4n6t5hpjscgr5yd00njf9zxsuugsyc2ccw' }
+    }
+
+    fetch(url, header).then(function (r) {
+      return r.json()
+    }).then(function (r) {
+      r.c.forEach(convert)
+    })
+  },
 
   methods: {
     sende: function (event) {

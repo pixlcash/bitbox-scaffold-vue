@@ -10,12 +10,12 @@
     <b-progress-bar v-if="savingstate" :value="counter" max="100" show-progress animated></b-progress-bar>
     <b-button  v-else v-on:click="save">to blockchain</b-button>
     <p v-bind:style="{ backgroundColor: '#'+picture.colors[selectedColorIndex]}">{{selectedColorIndex}}</p>
-    <button v-for="(color,index) in picture.colors" v-bind:style="{ backgroundColor: '#'+color,width: '2em',height:'2em'}" v-on:click="selectedColorIndex=index"></button>
+    <button v-for="(color,index) in picture.colors" :key="color.id" v-bind:style="{ backgroundColor: '#'+color,width: '2em',height:'2em'}" v-on:click="selectedColorIndex=index"></button>
     <table>
-      <tr v-for="(pallette, i) in palletes" @mouseleave="selectedPallette = -1" @mouseover="selectedPallette = i" v-on:click="choosePallette (pallette, i)" v-bind:style="{backgroundColor: ((choosenPallette==i)?'#FFD700':((selectedPallette==i)?'#DAA520':'white'))}">
+      <tr v-for="(pallette, i) in palletes" :key="pallette.id" @mouseleave="selectedPallette = -1" @mouseover="selectedPallette = i" v-on:click="choosePallette (pallette, i)" v-bind:style="{backgroundColor: ((choosenPallette==i)?'#FFD700':((selectedPallette==i)?'#DAA520':'white'))}">
         <td>{{pallette.name}}</td>
         <td>
-            <div v-for="color in pallette.colors" v-bind:style="{ backgroundColor: '#'+color,width: '1em',height:'1em',float:'left' }"></div>
+            <div v-for="color in pallette.colors" :key="color.id" v-bind:style="{ backgroundColor: '#'+color,width: '1em',height:'1em',float:'left' }"></div>
         </td>
       </tr>
     </table>
@@ -93,17 +93,11 @@ export default {
     }
 
     let query = {
-      request: {
-        encoding: {
-          b1: 'hex'
-        },
+
+      'v': 3,
+      'q': {
         'find': {
-          b1: '7e01'
-        }
-      },
-      response: {
-        encoding: {
-          b2: 'hex'
+          'out.h1': '7e01'
         }
       }
     }
@@ -112,10 +106,10 @@ export default {
     let that = this
     let convert = function (r) {
       let pallette = {
-        colors: r.b2.match(/.{1,6}/g),
-        name: r.s3,
-        tx: r.tx,
-        sender: r.senders[0]
+        colors: r.out[1].h2.match(/.{1,6}/g),
+        name: r.out[1].s3,
+        tx: r.tx.h,
+        sender: 'no'
       }
       that.palletes.push(pallette)
     }
@@ -126,13 +120,13 @@ export default {
       that.loading = ''
     }
     let header = {
-      headers: { key: 'qz89vqmg67zp5ek8h07llug6vcva8y903yylykv4tz' }
+      headers: { key: 'qpyh2anc4n6t5hpjscgr5yd00njf9zxsuugsyc2ccw' }
     }
 
     fetch(url, header).then(function (r) {
       return r.json()
     }).then(function (r) {
-      r.confirmed.forEach(convert)
+      r.c.forEach(convert)
       initPallette()
     })
   }
